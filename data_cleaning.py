@@ -7,8 +7,7 @@ class DataCleaning:
 	def clean_user_data(self, df):
 		df = self.clean_invalid_date(df, 'date_of_birth')
 		df = self.clean_invalid_date(df, 'join_date')
-		df = self.clean_NaNs_Nulls_misses(df)
-		df.drop(columns='1', inplace=True)
+		df = self.clean_null(df)
 		return df
 
 	def clean_order_data(self, df):
@@ -104,6 +103,12 @@ class DataCleaning:
 		df[column_name] = pd.to_datetime(df[column_name], errors='coerce')
 		df.dropna(subset=[column_name], how='any', inplace=True)
 		return df
+	
+	def clean_null(self, df):
+		df.replace('NULL', np.nan, inplace=True)
+		df.dropna(inplace=True)
+		# print(self.r_table)
+		return df 
 
 if __name__ == '__main__':
 	dc = DataCleaning()

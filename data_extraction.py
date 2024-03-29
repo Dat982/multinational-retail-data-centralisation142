@@ -4,6 +4,7 @@ import tabula
 import boto3
 import re
 import requests
+from data_cleaning import DataCleaning
 
 
 class DataExtractor:
@@ -86,7 +87,7 @@ if __name__ == '__main__':
 	
 	print(users.head())
 	
-	
+
 	url = 'https://data-handling-public.s3.eu-west-1.amazonaws.com/card_details.pdf'
 	df = DataExtractor.retrieve_pdf_data(url)
 	print(df.head())
